@@ -3,9 +3,7 @@
         <div class="container">
             <p class="date">{{ year }}/{{ month }}/{{ day }}</p>
             <div class="time">
-                <p class="time-item hours">{{ hours }}</p>
-                <p class="time-item minutes">{{ minutes }}</p>
-                <p class="time-item seconds">{{ seconds }}</p>
+                <p class="time-item">{{ hours }} : {{ minutes }} : {{ seconds }}</p>
             </div>
         </div>
     </div>
@@ -13,10 +11,6 @@
 
 
 <script>
-const zeroPadding = (num,digit) => {
-    return (Array(digit).join("0") + num).slice(-digit)
-}
-
 export default {
     data() {
         return {
@@ -28,19 +22,19 @@ export default {
             return this.date.getFullYear()
         },
         month() {
-            return zeroPadding(this.date.getMonth() + 1, 2)
+            return this.date.getMonth() + 1
        },
         day() {
-            return zeroPadding(this.date.getDate(), 2)
+            return this.date.getDate()
        },
         hours() {
-            return zeroPadding(this.date.getHours(), 2)
+            return this.date.getHours()
        },
         minutes() {
-            return zeroPadding(this.date.getMinutes(), 2)
+            return this.date.getMinutes()
        },
         seconds() {
-            return zeroPadding(this.date.getSeconds(), 2)
+            return this.date.getSeconds()
        },
     },
     mounted() {
@@ -49,8 +43,25 @@ export default {
     },
     methods: {
         setDate() {
-            this.data = new Date()
+            this.date = new Date()
         },
     },
 }
 </script>
+
+<style scoped>
+.container {
+    padding: 2%;
+    background-color: #f0f8ff;
+    color: gray;
+}
+.date {
+    text-align: right;
+    font-size: 1.5rem;
+}
+.time-item {
+    text-align: center;
+    font-size: 3rem;
+}
+</style>
+
